@@ -36,7 +36,7 @@ public class coin : MonoBehaviour
             Graphics.SetActive(false);
         }
             
-        Invoke(methodName: "Destroy", time: 0.5f);
+        Invoke(methodName: "Destroy", time: 0.1f);
 
 
     }
