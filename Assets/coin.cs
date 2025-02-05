@@ -10,13 +10,22 @@ public class coin : MonoBehaviour
 
     public GameObject Graphics;
 
-    public AudioClip Audioclip; 
+    public GameObject DeathSound;
+
+    public GameObject DeathParticle;
+
+   
+
+   
+
+    private ScoreManager _scoreManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _collider2D = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
+        _scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 
         if (_collider2D)
             Debug.Log(message: "This is le collider" + _collider2D);
@@ -26,18 +35,20 @@ public class coin : MonoBehaviour
     {
         Debug.Log(message:"We should destroy this object");
 
-        if (_audioSource && Audioclip && !_audioSource.isPlaying)
+        if (DeathSound)
         {
-            _audioSource.PlayOneShot(Audioclip);
+            GameObject.Instantiate(DeathSound, transform.position, transform.rotation);
         }
 
-        if (Graphics)
+        if (DeathParticle)
         {
-            Graphics.SetActive(false);
+            GameObject.Instantiate(DeathParticle, transform.position, transform.rotation);
         }
-            
-        Invoke(methodName: "Destroy", time: 0.5f);
 
+        if (_scoreManager)
+            _scoreManager.AddScore(Amount);
+
+        Destroy(gameObject);
 
     }
     void Destroy()
