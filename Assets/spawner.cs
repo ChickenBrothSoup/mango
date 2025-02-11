@@ -1,11 +1,11 @@
+using UnityEditor.XR;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
-{
-    public int RareSpawn = 10;
+public class spawner : MonoBehaviour
 
+
+{
     public GameObject potatoPrefab;
-    public GameObject RarePotato;
 
     public Vector2 MinMaxPos;
 
@@ -31,46 +31,21 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-    int currentChance = Random.Range(0, 100);
 
-    if (currentChance > RareSpawn)
-    {
-
-            if (potatoPrefab)
-            {
-                Vector3 randomposition = new Vector3(
-                    Random.Range(MinMaxPos.x, MinMaxPos.y),
-                    transform.position.y,
-                    transform.position.z
-                    );
-
-                GameObject.Instantiate(potatoPrefab,
-                     randomposition, Quaternion.identity);
-            }
-        }
-        else
+        if (potatoPrefab)
         {
-            if (RarePotato)
-            {
-                Vector3 randomposition = new Vector3(
-                    Random.Range(MinMaxPos.x, MinMaxPos.y),
-                    transform.position.y,
-                    transform.position.z
-                    );
+            Vector3 randomposition= new Vector3(
+                Random.Range(MinMaxPos.x, MinMaxPos.y),
+                transform.position.y,
+                transform.position.z
+                );
 
-                GameObject.Instantiate(RarePotato,
-                     randomposition, Quaternion.identity);
-            }
-
-
-
-
-
-
+            GameObject.Instantiate(potatoPrefab,
+                 randomposition, Quaternion.identity);
         }
+        
 
         spawnTimer = SpawnInterval;
 
     }
-
 }
